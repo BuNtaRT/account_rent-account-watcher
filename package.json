@@ -1,0 +1,29 @@
+{
+  "name": "account-watcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "ts-node-esm src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/pg": "^8.10.9",
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "date-fns": "^2.30.0",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.7",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.3",
+    "@types/node-cron": "^3.0.11",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  }
+}
