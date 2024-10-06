@@ -8,4 +8,4 @@ export const pool = new pg.Pool({
 	database: "account-management",
 });
 
-export type Tables = "games" | "accounts" | "games_account_relation" | "account_activity" | "product_account";
+export type Tables = "games" | "accounts" | "games_account_relation" | "account_activity" | "product_account" | "mail";

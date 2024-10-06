@@ -14,4 +14,5 @@ export type AccountType = {
 	login: string;
 	password: string;
 	steam_id: string;
+	mail_id: number;
 };

@@ -1,23 +1,30 @@
 import { createRequire } from "module";
+import Connection, { ImapMessage } from "imap";
+import { Mails } from "../../database/mails.js";
+import { delay } from "../../utils/delay.js";
+
 const require = createRequire(import.meta.url);
 
-import Connection, { ImapMessage } from "imap";
 const Imap = require("Imap");
-import getAuthCode from "./mailModules/getAuthCode.js";
-import { delay } from "./delay.js";
-import log from "./log/log.js";
 
-export const InitMail = async (module: MailModuleType): Promise<string> =>
+export const workerMail = async (module: MailModuleType, id: number): Promise<string> =>
 	new Promise(async (resolve, reject) => {
-		await delay(1000 * 15);
-		const user = "gamecoffee89";
-		const password = "888888";
+		const mails = new Mails();
+		const mailData = await mails.getBy(id);
+		if (!mailData) throw `mail not found by id ${id}`;
 
+		const mailType = mailData.address.split("@")[1];
+		const host = mailType === "yandex.ru" ? "imap.yandex.ru" : "";
+		const user = mailData.address.split("@")[0];
+		const password = mailData.password;
+
+		await delay(1000 * 10);
+		getLastMail();
 		function getLastMail() {
 			const imap = new Imap({
-				user: user,
-				password: password,
-				host: "imap.yandex.ru",
+				user,
+				password,
+				host,
 				port: 993,
 				tls: true,
 			});
@@ -27,7 +34,7 @@ export const InitMail = async (module: MailModuleType): Promise<string> =>
 				const fetchInbox = imap.seq.fetch(box.messages.total + ":*", { bodies: ["TEXT"], struct: true });
 
 				fetchInbox.on("message", (message: ImapMessage) => {
-					message.on("body", (stream, info) => {
+					message.on("body", (stream) => {
 						let buffer = "";
 
 						stream.on("data", function (chunk) {
@@ -35,7 +42,10 @@ export const InitMail = async (module: MailModuleType): Promise<string> =>
 						});
 						stream.once("end", function () {
 							const code = module(buffer);
-							if (code) resolve(code);
+							if (code) {
+								clearInterval(getLastMailInterval);
+								resolve(code);
+							}
 						});
 					});
 				});

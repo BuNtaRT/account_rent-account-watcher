@@ -12,20 +12,26 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "@types/pg": "^8.10.9",
-    "axios": "^1.6.2",
+    "@types/steam-user": "^5.0.3",
+    "axios": "^1.7.7",
+    "axios-curlirize": "^2.0.0",
     "cheerio": "^1.0.0-rc.12",
     "date-fns": "^2.30.0",
     "imap": "^0.8.19",
     "node-cron": "^3.0.3",
     "pg": "^8.11.3",
-    "quoted-printable": "^1.0.1"
+    "quoted-printable": "^1.0.1",
+    "steam-user": "^5.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.12.0",
     "@types/imap": "^0.8.40",
-    "@types/node": "^20.10.3",
+    "@types/node": "^22.7.4",
     "@types/node-cron": "^3.0.11",
     "@types/quoted-printable": "^1.0.2",
+    "globals": "^15.10.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
   }
