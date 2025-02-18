@@ -5,14 +5,15 @@ export class Accounts extends Query<AccountType> {
 		super("accounts", "id", "id");
 	}
 }
-//    id SERIAL PRIMARY KEY,
+//     id SERIAL PRIMARY KEY,
 //     login VARCHAR(255) NOT NULL,
 //     password VARCHAR(255) NOT NULL,
-//     steam_id VARCHAR(255) NOT NULL
+//		 account_steam VARCHAR(255) NOT NULL,
+//		 mail_id INT REFERENCES mail(id)
 export type AccountType = {
 	id: number;
 	login: string;
 	password: string;
-	steam_id: string;
+	account_steam: string;
 	mail_id: number;
 };

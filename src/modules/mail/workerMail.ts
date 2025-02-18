@@ -7,7 +7,7 @@ const require = createRequire(import.meta.url);
 
 const Imap = require("Imap");
 
-export const workerMail = async (module: MailModuleType, id: number): Promise<string> =>
+export const workerMail = async (module: MailModuleType, id: string | number): Promise<string> =>
 	new Promise(async (resolve, reject) => {
 		const mails = new Mails();
 		const mailData = await mails.getBy(id);

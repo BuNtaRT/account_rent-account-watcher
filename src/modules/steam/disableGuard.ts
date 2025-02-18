@@ -1,23 +1,33 @@
-import { AccountType } from "../../database/accounts.js";
-import SteamUser from "steam-user";
 import { delay } from "../../utils/delay.js";
 import axios from "axios";
 import { workerMail } from "../mail/workerMail.js";
-import { getDisableGuardLink } from "../mail/mailModules/getDisableGuardLink.js";
+import { getDisableGuardLink } from "../mail/mailModules/index.js";
+import { SteamModuleArgumentsType } from "./workerSteam.js";
 
-export const disableGuard = (steamClient: SteamUser, account: AccountType) => {
+export const disableGuard = (props: SteamModuleArgumentsType) => {
+	const { account, steamClient, resolver } = props;
 	const mailId = account.mail_id;
 
 	steamClient.on("webSession", async (sessionID, cookie) => {
-		console.log("webSession", sessionID, cookie);
-		await delay(3000);
+		const guardDetail = await steamClient.getSteamGuardDetails();
 
-		let data = new FormData();
-		data.append("action", "actuallynone");
-		data.append("sessionid", sessionID);
+		if (guardDetail.isSteamGuardEnabled) {
+			await delay(3000);
 
-		await axios.post("https://store.steampowered.com/twofactor/manage_action", data, { headers: { cookie } });
-		const link = await workerMail(getDisableGuardLink, mailId);
-		await axios.get(link);
+			let data = new FormData();
+			data.append("action", "actuallynone");
+			data.append("sessionid", sessionID);
+
+			const res = await axios.post("https://store.steampowered.com/twofactor/manage_action", data, { headers: { cookie } });
+			console.log("send disable", res);
+			const link = await workerMail(getDisableGuardLink, mailId);
+			await axios.get(link);
+
+			steamClient.logOff();
+			resolver(true);
+		} else {
+			steamClient.logOff();
+			resolver(true);
+		}
 	});
 };

@@ -13,17 +13,26 @@
   "license": "ISC",
   "dependencies": {
     "@types/axios": "^0.14.0",
+    "@types/node-rsa": "^1.1.4",
     "@types/pg": "^8.10.9",
+    "@types/selenium-webdriver": "^4.1.26",
     "@types/steam-user": "^5.0.3",
     "axios": "^1.7.7",
+    "axios-cookiejar-support": "^5.0.3",
     "axios-curlirize": "^2.0.0",
     "cheerio": "^1.0.0-rc.12",
     "date-fns": "^2.30.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.13.0",
     "imap": "^0.8.19",
     "node-cron": "^3.0.3",
+    "node-rsa": "^1.1.1",
+    "passfather": "^3.0.6",
     "pg": "^8.11.3",
     "quoted-printable": "^1.0.1",
-    "steam-user": "^5.2.0"
+    "selenium-webdriver": "^4.25.0",
+    "steam-user": "^5.2.0",
+    "tough-cookie": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.12.0",

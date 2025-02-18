@@ -5,12 +5,11 @@ import * as cheerio from "cheerio";
 const require = createRequire(import.meta.url);
 const utf8 = require("utf8");
 
-export const getAuthCode = (buffer: string) => {
+export const getPassCode = (buffer: string) => {
 	try {
 		const decodeMessage = utf8.decode(quotedPrintable.decode(buffer));
 
-		console.log("message", !decodeMessage.includes("codefornewcomputerwithiplocwarning"));
-		if (!decodeMessage.includes("codefornewcomputerwithiplocwarning")) return false;
+		if (!decodeMessage.includes("AccountRecoveryCode")) return false;
 
 		const $ = cheerio.load(decodeMessage);
 		const code = $(".title-48.c-blue1.fw-b.a-center")
