@@ -5,8 +5,9 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "node --loader ts-node/esm src/index.ts",
+    "build": "rimraf ./build && npx tsc",
+    "start": "npm run build && node build/index"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "passfather": "^3.0.6",
     "pg": "^8.11.3",
     "quoted-printable": "^1.0.1",
+    "rimraf": "^6.0.1",
     "selenium-webdriver": "^4.25.0",
     "steam-user": "^5.2.0",
     "tough-cookie": "^5.0.0"
