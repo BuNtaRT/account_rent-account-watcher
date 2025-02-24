@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "run": "node --loader ts-node/esm src/index.ts",
-    "build": "rm -rf ./build && npx tsc",
+    "build": "rimraf ./build && npx tsc",
     "start": "npm run build && node build/index"
   },
   "keywords": [],
