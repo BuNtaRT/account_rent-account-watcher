@@ -1,9 +1,6 @@
-import { createRequire } from "module";
 import quotedPrintable from "quoted-printable";
 import * as cheerio from "cheerio";
-
-const require = createRequire(import.meta.url);
-const utf8 = require("utf8");
+import utf8 from "utf8";
 
 export const getAuthCode = (buffer: string) => {
 	try {

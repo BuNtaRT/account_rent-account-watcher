@@ -1,11 +1,6 @@
-import { createRequire } from "module";
 import Connection, { ImapMessage } from "imap";
 import { Mails } from "../../database/mails.js";
 import { delay } from "../../utils/delay.js";
-
-const require = createRequire(import.meta.url);
-
-const Imap = require("Imap");
 
 export const workerMail = async (module: MailModuleType, id: string | number): Promise<string> =>
 	new Promise(async (resolve, reject) => {
@@ -21,7 +16,7 @@ export const workerMail = async (module: MailModuleType, id: string | number): P
 		await delay(1000 * 10);
 		getLastMail();
 		function getLastMail() {
-			const imap = new Imap({
+			const imap = new Connection({
 				user,
 				password,
 				host,
