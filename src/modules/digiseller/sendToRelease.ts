@@ -7,6 +7,7 @@ dotenv.config();
 
 const PORT_DGI = process.env.PORT_DGI;
 const KEY_DGI = process.env.KEY_DGI;
+const HOST_DGI = process.env.HOST_DGI;
 
 export const sendToRelease = async (accounts: AccountWithProductType[]) => {
 	const formatingAccounts = accounts.reduce((acc, { login, password, digiseller_id }) => {
@@ -16,7 +17,7 @@ export const sendToRelease = async (accounts: AccountWithProductType[]) => {
 
 		return acc;
 	}, {} as ResaleAccountType);
-	const response = await axios.post(`http://localhost:${PORT_DGI}/product-update?apikey=${KEY_DGI}`, formatingAccounts);
+	const response = await axios.post(`http://${HOST_DGI}:${PORT_DGI}/product-update?apikey=${KEY_DGI}`, formatingAccounts);
 
 	if (response.status !== 200)
 		await sendToTelegram(` product-update from account watcher status ${response.status} res - ${JSON.stringify(response.data)}`);
