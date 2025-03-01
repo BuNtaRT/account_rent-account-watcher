@@ -1,8 +1,8 @@
-import { sendToTelegram } from "./utils/sentToTelegram.js";
 import { getNonActive } from "./modules/account/getNoneActiveAccounts.js";
 import { getExpiredAccounts } from "./modules/account/getExpiredAccounts.js";
 import { changePassword } from "./changePassword.js";
 import { sendToRelease } from "./modules/digiseller/sendToRelease.js";
+import { sendToTelegram } from "./utils/sentToTelegram.js";
 
 try {
 	const nonActiveAccounts = await getNonActive();
@@ -20,5 +20,7 @@ try {
 		await sendToRelease(expiredAccounts);
 	}
 } catch (e) {
+	console.error(e);
 	await sendToTelegram(e);
+	throw e;
 }
