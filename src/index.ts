@@ -1,9 +1,7 @@
-import { getNonActive } from "./modules/account/getNoneActiveAccounts.js";
-import { getExpiredAccounts } from "./modules/account/getExpiredAccounts.js";
-import { changePassword } from "./changePassword.js";
 import { sendToRelease } from "./modules/digiseller/sendToRelease.js";
-import { sendToTelegram } from "./utils/sentToTelegram.js";
+import { AccountWithProductType } from "./modules/account/getNoneActiveAccounts.js";
 
+/*
 try {
 	const nonActiveAccounts = await getNonActive();
 	const expiredAccounts = await getExpiredAccounts();
@@ -24,3 +22,6 @@ try {
 	await sendToTelegram(e);
 	throw e;
 }
+ */
+console.log("send trash");
+await sendToRelease([{ login: "log", password: "pass", digiseller_id: "1234444444" }] as AccountWithProductType[]);
