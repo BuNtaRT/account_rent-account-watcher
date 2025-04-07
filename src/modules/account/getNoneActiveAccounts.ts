@@ -19,7 +19,7 @@ export async function getNonActive() {
                JOIN account_activity ON accounts.id = account_activity.account_id
                LEFT JOIN games_account_relation ON accounts.id = games_account_relation.account_id
                LEFT JOIN games_product ON games_account_relation.game_id = games_product.id
-      WHERE account_activity.date_expired >= $1 AND account_activity.user_count > 0 AND account_activity.user_count < 3 AND account_activity.date_update <= $1 - INTERVAL '7 days';
+      WHERE account_activity.date_expired > $1 AND account_activity.user_count > 0 AND account_activity.user_count < 3 AND account_activity.date_update <= $1 - INTERVAL '7 days';
 	`;
 
 	const accountsResult = (await pool.query({ text: query, values: [now] })).rows as AccountWithProductType[];
