@@ -32,10 +32,10 @@ export const seleniumChangePass = async (account: AccountType, updatedPassword: 
 
 		await driver.wait(until.elementLocated(By.xpath(`//*[@id="account_pulldown"]`)), 10000);
 
-		await driver.get("https://store.steampowered.com/account/");
-		await driver.wait(until.elementLocated(By.xpath("//div[2]/div[6]/div[1]/div[2]/div[2]/a")), 10000);
+		await driver.get("https://store.steampowered.com/account/authorizeddevices");
+		await driver.wait(until.elementLocated(By.xpath("//*[@id=\"main_content\"]/div[2]/div/div/div[2]/div[3]/div[1]/div[2]/a")), 10000);
 
-		const changePassBtn = await driver.findElement(By.xpath("//div[2]/div[6]/div[1]/div[2]/div[2]/a"));
+		const changePassBtn = await driver.findElement(By.xpath("//*[@id=\"main_content\"]/div[2]/div/div/div[2]/div[3]/div[1]/div[2]/a"));
 		await changePassBtn.click();
 
 		await driver.wait(until.elementLocated(By.xpath('//*[@id="wizard_contents"]/div/a[2]')), 10000);
